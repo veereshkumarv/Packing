@@ -1,0 +1,28 @@
+<core:FragmentDefinition 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Dialog id="createSampleID" title="Create Sample" class="sapUiNoContentPadding">
+		<content>
+			<form:SimpleForm id="createSampleFormID" editable="true">
+                <Label id="opNumLableID" text="Operation Number" labelFor="opNumInput"/>
+                <MultiInput
+                    id="opNumInput"
+                    width="100%"
+                    valueHelpRequest=".onValueHelpRequestedSample">
+                </MultiInput>
+                <Label id="palletLabelID" text="Pallet ID/Container" labelFor="palletInput" />
+                <Input
+                    id="palletInput"
+                    width="100%"
+                    maxLength="8">
+                </Input>
+            </form:SimpleForm>
+		</content>
+		<buttons>
+			<Button id="btnok" text="OK" press="onActionOKCreateSample" />
+			<Button id="btncancel" text="Cancel" press="onActionCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

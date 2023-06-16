@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="Please Select an Operation Number"
+		ok=".onValueHelpSampleOkPress"
+		cancel=".onValueHelpCancelPress"
+		key="operation"
+		descriptionKey="operation"
+		supportMultiselect="false">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearchSample">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="operation"
+						label="Operation Number"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="operation" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

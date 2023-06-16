@@ -1,0 +1,95 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:smartField="sap.ui.comp.smartfield"
+    controllerName="packingapp.packingapp.ext.controller.CustomButtons">
+    <FlexBox
+	alignItems="Start"
+	justifyContent="End">
+        <Button text="Pack To Customer"
+                press="onPress"
+                id = "PackToCust"
+                class="sapUiSmallMarginEnd"
+                type="Ghost">
+        </Button>
+        <Button text="Pack To Stock"
+                press="onPress"
+                id = "PackToStock"
+                class="sapUiSmallMarginEnd"
+                type="Ghost">
+        </Button>
+    </FlexBox>
+
+    <smartForm:SmartForm id="smartformImportance" title="{Name}">
+        <smartForm:layout>
+            <smartForm:ColumnLayout columnsM="2" columnsL="3" columnsXL="4"/>
+        </smartForm:layout>
+
+
+        <smartForm:Group label="Manufacturing Order Information">
+            <smartForm:GroupElement id="orderIDGroupElement" label="Order">
+                <smartField:SmartField id="orderID" value="{orderNumber}" />
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="materialGroupElement" label="Material">
+                <smartField:SmartField id="materialID" value="{materialObj}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="CustomerGroupElementID" label="Customer">
+                <smartField:SmartField id="CustomerID" value="{customerObj}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="BasicStartDate" label="Basic Start Date">
+                <smartField:SmartField id="basicStartDateID" value="{startDate}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="BasicFinishDate" label="Basic Finish Date">
+                <smartField:SmartField id="basicFinishDateID" value="{finishDate}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="plannedQuant" label="Planned Quantity">
+                <smartField:SmartField id="plannedQuantID" value="{manuPlannedQuant}"/>
+            </smartForm:GroupElement> 
+            <smartForm:GroupElement id="receivedQuant" label="Received Quantity">
+                <smartField:SmartField id="receivedQuantID" value="{recievedQuant}"/>
+            </smartForm:GroupElement> 
+            <smartForm:GroupElement id="prodOrderNote" label="Production Order Note">
+                <smartField:SmartField id="prodOrderNoteID" value="{prodOrderLongText}"/>
+            </smartForm:GroupElement> 
+            <smartForm:GroupElement id="workCenter" label="Work Center">
+                <smartField:SmartField id="workCenterID" value="{workCenterDesc}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="carrier" label="Carrier">
+                <smartField:SmartField id="carrierID" value="{carrierDesc}"/>
+            </smartForm:GroupElement>  
+        </smartForm:Group>
+
+        <smartForm:Group label="Handling Unit Information">
+            <smartForm:GroupElement id="numHUPalletsIDGroupElement" label="Number of HUs to be Created">
+                <smartField:SmartField id="numHUPalletsID" value="{numHUPallets}" />
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="packInstIDGroupElement" label="Packaging Instructions ID">
+                <smartField:SmartField id="packInstructionID" value="{PackingInstObj}" />
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="packInstGroupElement" label="Packaging Instructions">
+                <smartField:SmartField id="packInstructionDescID" value="{PackingInstDescObj}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="packMaterial" label="Packaging Material">
+                <smartField:SmartField id="packMaterialID" value="{packagingMaterialObj}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="packMaterialDesc" label="Packaging Material Description">
+                <smartField:SmartField id="packMaterialDescID" value="{packagingMaterialObjDesc}"/>
+            </smartForm:GroupElement>
+            <smartForm:GroupElement id="quantGroupElement" label="Quantity">
+                <Input id="quantID" value="{PackingInstQuantObj}"/>
+            </smartForm:GroupElement>  
+            <smartForm:GroupElement id="custStatusGroupElement" label="Customer required container status">
+                <smartField:SmartField id="custStatusID" value="{custStatus}"/>
+            </smartForm:GroupElement> 
+            <smartForm:GroupElement id="auxMatGroupElement" label="Auxiliary Packing Material">
+                <smartField:SmartField id="auxMatID" value="{auxPackMaterialObj}"/>
+            </smartForm:GroupElement> 
+            <smartForm:GroupElement id="auxMatDescGroupElement" label="Auxiliary Packing Material Description">
+                <smartField:SmartField id="auxMatDescID" value="{auxPackMaterialObjDesc}"/>
+            </smartForm:GroupElement> 
+        </smartForm:Group>
+
+    </smartForm:SmartForm>
+</mvc:View>

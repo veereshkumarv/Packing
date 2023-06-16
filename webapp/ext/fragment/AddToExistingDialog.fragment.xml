@@ -1,0 +1,22 @@
+<core:FragmentDefinition 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Dialog id="addToExistingID" title="Enter Container Serial Number" class="sapUiNoContentPadding">
+		<content>
+			<form:SimpleForm id="addToExistingFormID" editable="true">
+                <Label id="containerID" text="Container Serial Number" labelFor="containerInput"/>
+                <Input
+                    id="containerInput"
+                    width="100%"
+                    maxLength="8">
+                </Input>
+            </form:SimpleForm>
+		</content>
+		<buttons>
+			<Button id="btnok" text="OK" press="onActionOKAddToExisting" />
+			<Button id="btncancel" text="Cancel" press="onActionCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

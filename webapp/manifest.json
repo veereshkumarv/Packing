@@ -1,0 +1,229 @@
+{
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "packingapp.packingapp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.9.7",
+            "toolsId": "18005f33-b264-4eec-9dc3-100acb957c59"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZSCM_PACKAPP_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZSCM_PACKAPP_SRV_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZSCM_PACKAPP_SRV_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSCM_PACKAPP_SRV_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZSCM_PACKAPP_SRV_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.108.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "packingapp.packingapp.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.viewExtensions": {
+                  "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+                      "BeforeFacet|ZSCM_C_PACKING_APP|OpenDeliveries": {
+                          "type": "XML",
+                          "className": "sap.ui.core.mvc.View",
+                          "viewName": "packingapp.packingapp.ext.view.ObjectPageContent",
+                          "sap.ui.generic.app": {
+                              "title": "Packing Information"
+                          }
+                      }
+                  }
+                },
+                "sap.ui.controllerExtensions": {
+                    "sap.suite.ui.generic.template.ObjectPage.view.Details": {
+                        "controllerName": "packingapp.packingapp.ext.controller.ObjectPageExt",
+                        "sap.ui.generic.app": {
+                            "ZSCM_C_PACKING_APP": {
+                                "EntitySet": "ZSCM_C_PACKING_APP",
+                                "Header": {
+                                    "Actions": {
+                                        "sendToCoLos": {
+                                            "id": "sendToCoLosButton",
+                                            "text": "Send To CoLos",
+                                            "press": "sendToCoLos",
+                                            "requiresSelection": false
+                                        },
+                                        "createSample": {
+                                            "id": "createSampleButton",
+                                            "text": "Create Sample",
+                                            "press": "createSample",
+                                            "requiresSelection": false
+                                        },
+                                        "createHU": {
+                                            "id": "createHUButton",
+                                            "text": "Create HU",
+                                            "press": "createHU",
+                                            "requiresSelection": false
+                                        },
+                                        "addToExisting": {
+                                            "id": "addToExistingButton",
+                                            "text": "Add To Existing HU",
+                                            "press": "addToExisting",
+                                            "requiresSelection": false
+                                        },
+                                        "displyPackInst": {
+                                            "id": "displyPackInstButton",
+                                            "text": "Display Packaging Instructions",
+                                            "press": "displyPackInst",
+                                            "requiresSelection": false
+                                            
+                                        }
+                                    }
+                                },
+                                "Sections": {
+                                    "OpenDeliveries": {
+                                        "id": "OpenDeliveries",
+                                        "Actions": {
+                                            "packToOrder": {
+                                                "id": "packToOrderButton",
+                                                "text": "Pack To Order",
+                                                "press": "packToOrder",
+                                                "requiresSelection": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.ui.generic.app": {
+        "_version": "1.3.0",
+        "settings": {
+            "forceGlobalRefresh": false,
+            "objectPageHeaderType": "Dynamic",
+            "considerAnalyticalParameters": true,
+            "showDraftToggle": false
+        },
+        "pages": {
+            "ListReport|ZSCM_C_PACKING_APP": {
+                "entitySet": "ZSCM_C_PACKING_APP",
+                "component": {
+                    "name": "sap.suite.ui.generic.template.ListReport",
+                    "list": true,
+                    "settings": {
+                        "condensedTableLayout": true,
+                        "smartVariantManagement": true,
+                        "enableTableFilterInPageVariant": true,
+                        "filterSettings": {
+                            "dateSettings": {
+                                "useDateRange": true
+                            }
+                        }
+                    }
+                },
+                "pages": {
+                    "ObjectPage|ZSCM_C_PACKING_APP": {
+                        "entitySet": "ZSCM_C_PACKING_APP",
+                        "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
+                        "component": {
+                            "name": "sap.suite.ui.generic.template.ObjectPage"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

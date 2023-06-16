@@ -1,0 +1,28 @@
+<core:FragmentDefinition 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Dialog id="createHUID" title="Select Container Details" class="sapUiNoContentPadding">
+		<content>
+			<form:SimpleForm id="createHUFormID" editable="true">
+                <Label id="contLableID" text="Select Container" labelFor="containerInput"/>
+                <MultiInput
+                    id="containerInput"
+                    width="100%"
+                    valueHelpRequest=".onValueHelpRequestedHUCont">
+                </MultiInput>
+                <Label id="sealNumberLabelID" text="Enter Seal Number" labelFor="sealNumberInput" />
+                <Input
+                    id="sealNumberInput"
+                    width="100%"
+                    maxLength="8">
+                </Input>
+            </form:SimpleForm>
+		</content>
+		<buttons>
+			<Button id="btnok" text="OK" press="onActionOKCreateHU" />
+			<Button id="btncancel" text="Cancel" press="onActionCancel"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

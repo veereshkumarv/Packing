@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='SAP__SELF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zscm_packapp_def" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="C_MaterialvhType" sap:label="Material Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Material Description"/>
+            </EntityType>
+            <EntityType Name="ZSCM_C_PACKING_APPType" sap:label="Root Entity for Packing APp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="orderNumber"/>
+                    <PropertyRef Name="plant"/>
+                    <PropertyRef Name="product"/>
+                </Key>
+                <Property Name="create_hu_ac" Type="Edm.Boolean" sap:label="Dyn. Action Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="orderNumber" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number for Order" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer Number"/>
+                <Property Name="CustomerDesc" Type="Edm.String" MaxLength="35" sap:label="Customer" sap:quickinfo="Name 1"/>
+                <Property Name="customerObj" Type="Edm.String" MaxLength="46" sap:label="Customer"/>
+                <Property Name="startDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Scheduled start"/>
+                <Property Name="finishDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval" sap:label="Scheduled finish"/>
+                <Property Name="orderNumberItem" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="orderItem" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Order item number"/>
+                <Property Name="uom" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="salesOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Order" sap:quickinfo="Sales Order Number"/>
+                <Property Name="status" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Object status"/>
+                <Property Name="statText" Type="Edm.String" MaxLength="30" sap:label="Status" sap:quickinfo="Object status"/>
+                <Property Name="packInstru" Type="Edm.String" MaxLength="22" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packInstDescription" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="materialDescrip" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="carrier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="carrierDesc" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
+                <Property Name="materialObj" Type="Edm.String" MaxLength="81" sap:label="Material"/>
+                <Property Name="plannedQuantityUom" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="manuPlannedQuant" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="plannedQuantityUom" sap:label="Total Order Quantity"/>
+                <Property Name="workCenterDesc" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Short description"/>
+                <Property Name="workCenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center" sap:value-list="standard"/>
+                <Property Name="recievedQuant" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="GR Quantity" sap:quickinfo="Quantity of Goods Received for the Order Item"/>
+                <Property Name="PackingCustomerInstructions" Type="Edm.String" MaxLength="22" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packCustomerType" Type="Edm.String" MaxLength="22" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packStockType" Type="Edm.String" MaxLength="22" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingCustInstDesc" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstCustQuant" Type="Edm.Decimal" Precision="10" Scale="2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstObj" Type="Edm.String" MaxLength="22" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstDescObj" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstQuantObj" Type="Edm.Decimal" Precision="10" Scale="2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstQuant" Type="Edm.Decimal" Precision="10" Scale="2" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterial" Type="Edm.String" MaxLength="40" sap:label="Packaging Material" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Packaging Material Description" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialCustr" Type="Edm.String" MaxLength="40" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialCustDesc" Type="Edm.String" MaxLength="40" sap:label="Packaging Material Description" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialObj" Type="Edm.String" MaxLength="40" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialObjDesc" Type="Edm.String" MaxLength="40" sap:label="Packaging Material Description" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packInstructionsKey" Type="Edm.String" MaxLength="22" sap:label="Packaging Instructions Key" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packInstructionsCustKey" Type="Edm.String" MaxLength="22" sap:label="Packaging Customer Instructions Key" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="prodOrderLongText" Type="Edm.String" MaxLength="250" sap:label="Production Order Note" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="numHUPallets" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="Number of Planned HUs" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterial" Type="Edm.String" MaxLength="40" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterialDesc" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterialObj" Type="Edm.String" MaxLength="40" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterialObjDesc" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterialCust" Type="Edm.String" MaxLength="40" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxPackMaterialCustDesc" Type="Edm.String" MaxLength="100" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packInstURL255" Type="Edm.String" MaxLength="255" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="multiContainerText" Type="Edm.String" MaxLength="255" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="multiContFlag" Type="Edm.String" MaxLength="1" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="salesOrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
+                <Property Name="StorLoc" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="stat6" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Container Quality"/>
+                <Property Name="stat7" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Container Type"/>
+                <Property Name="stat8" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Container Fumigation"/>
+                <Property Name="stat9" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Container Usage"/>
+                <Property Name="scheduledStartTime" Type="Edm.Time" Precision="0" sap:label="Scheduled start time" sap:quickinfo="Scheduled Start (Time)"/>
+                <Property Name="custStatus" Type="Edm.String" MaxLength="15"/>
+                <NavigationProperty Name="to_deliveries" Relationship="cds_zscm_packapp_def.assoc_423F30388E3EF8B840909D5E271BEDFE" FromRole="FromRole_assoc_423F30388E3EF8B840909D5E271BEDFE" ToRole="ToRole_assoc_423F30388E3EF8B840909D5E271BEDFE"/>
+            </EntityType>
+            <EntityType Name="HUType" sap:label="Handling Unit Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="HUID1"/>
+                </Key>
+                <Property Name="HUID1" Type="Edm.String" Nullable="false" MaxLength="20" sap:display-format="UpperCase" sap:label="Handling Unit" sap:quickinfo="External Handling Unit Identification"/>
+                <Property Name="HUID2" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="HU identification 2" sap:quickinfo="Handling Unit's 2nd External Identification"/>
+            </EntityType>
+            <EntityType Name="ZSCM_I_OpenDelivery_L2Type" sap:label="Open Deliveries L2" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="salesOrder"/>
+                </Key>
+                <Property Name="salesOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Sales Document"/>
+                <Property Name="salesOrderPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:quickinfo="Plant (Own or External)"/>
+                <Property Name="outboundDelivery" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Reference Document" sap:quickinfo="Document Number of Reference Document"/>
+                <Property Name="shipToDesc" Type="Edm.String" MaxLength="35" sap:label="Name" sap:quickinfo="Name 1"/>
+                <Property Name="shipTo" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ship-to Party"/>
+                <Property Name="salesOrderProd" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="shippingPoint" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Shipping Point" sap:quickinfo="Shipping Point / Receiving Point"/>
+                <Property Name="salesOrderQuant" Type="Edm.Decimal" Precision="15" Scale="3" sap:label="Order Quantity" sap:quickinfo="Cumulative order quantity in sales units"/>
+                <Property Name="salesOrderUom" Type="Edm.String" MaxLength="3" sap:label="Target Quantity UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="goodsIssueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Goods Issue Date"/>
+                <Property Name="productDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="currentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="PackingInstructionsSO" Type="Edm.String" MaxLength="22" sap:label="Packaging Instruction" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstructionKeySO" Type="Edm.String" MaxLength="40" sap:label="Packaging Instruction Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstDescSO" Type="Edm.String" MaxLength="100" sap:label="Packing Instructions Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PackingInstQuantSO" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="Packing Instructions Quantity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialSO" Type="Edm.String" MaxLength="40" sap:label="Packaging Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="packagingMaterialDescriptionSO" Type="Edm.String" MaxLength="100" sap:label="Packaging Material Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxMaterialSO" Type="Edm.String" MaxLength="40" sap:label="Auxiliary Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="auxMaterialDescSO" Type="Edm.String" MaxLength="100" sap:label="Auxiliary Material Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZSCM_I_SampleOperationVH_L1Type" sap:label="Packing App Operation VH L1" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="prueflos"/>
+                </Key>
+                <Property Name="prueflos" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="NonNegative" sap:label="Inspection Lot" sap:quickinfo="Inspection Lot Number"/>
+                <Property Name="prodorder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="plnty" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Task List Type"/>
+                <Property Name="plnnr" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Group" sap:quickinfo="Key for Task List Group"/>
+                <Property Name="activity" Type="Edm.String" MaxLength="4"/>
+                <Property Name="shortText" Type="Edm.String" MaxLength="40" sap:label="Operation Short Text"/>
+            </EntityType>
+            <EntityType Name="MaterialType" sap:label="Material VH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MaterialNumber"/>
+                </Key>
+                <Property Name="MaterialNumber" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material Number"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Material Description"/>
+            </EntityType>
+            <EntityType Name="PlantType" sap:label="Plant VH" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="30" sap:label="Description" sap:quickinfo="Name"/>
+            </EntityType>
+            <EntityType Name="ZSCM_Resource_VHType" sap:label="Resource VH" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="workCenter"/>
+                </Key>
+                <Property Name="workCenter" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Short description"/>
+            </EntityType>
+            <EntityType Name="SAP__Currency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CurrencyCode"/>
+                </Key>
+                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO code"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Short text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="Decimals"/>
+            </EntityType>
+            <EntityType Name="SAP__UnitOfMeasure" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UnitCode"/>
+                </Key>
+                <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Commercial"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Measurement Unit Txt"/>
+                <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places"/>
+            </EntityType>
+            <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <NavigationProperty Name="Format" Relationship="cds_zscm_packapp_def.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="TableColumns" Relationship="cds_zscm_packapp_def.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
+                <NavigationProperty Name="CoverPage" Relationship="cds_zscm_packapp_def.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
+                <NavigationProperty Name="Signature" Relationship="cds_zscm_packapp_def.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
+                <NavigationProperty Name="PDFStandard" Relationship="cds_zscm_packapp_def.to_pdfstandard" FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard"/>
+            </EntityType>
+            <EntityType Name="SAP__Format" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="FitToPage" Type="cds_zscm_packapp_def.SAP__FitToPage" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Orientation" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PaperSize" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BorderSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFStandard" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UsePDFAConformance" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__TableColumns" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                    <PropertyRef Name="Header"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Header" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HorizontalAlignment" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__CoverPage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Title"/>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                </Key>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Signature" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reason" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__ValueHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VALUEHELP"/>
+                </Key>
+                <Property Name="VALUEHELP" Type="Edm.String" Nullable="false"/>
+                <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="DESCRIPTION" Type="Edm.String"/>
+            </EntityType>
+            <ComplexType Name="SAP__FitToPage">
+                <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MinimumFontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="assoc_423F30388E3EF8B840909D5E271BEDFE" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType" Multiplicity="1" Role="FromRole_assoc_423F30388E3EF8B840909D5E271BEDFE"/>
+                <End Type="cds_zscm_packapp_def.ZSCM_I_OpenDelivery_L2Type" Multiplicity="*" Role="ToRole_assoc_423F30388E3EF8B840909D5E271BEDFE"/>
+            </Association>
+            <Association Name="to_format" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
+                <End Type="cds_zscm_packapp_def.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_tablecolumns" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_tablecolumns"/>
+                <End Type="cds_zscm_packapp_def.SAP__TableColumns" Multiplicity="*" Role="ToRole_to_tablecolumns"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_coverpage" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_coverpage"/>
+                <End Type="cds_zscm_packapp_def.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_signature" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_signature"/>
+                <End Type="cds_zscm_packapp_def.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_pdfstandard" sap:content-version="1">
+                <End Type="cds_zscm_packapp_def.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_pdfstandard"/>
+                <End Type="cds_zscm_packapp_def.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="cds_zscm_packapp_def_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="SAP__Currencies" EntityType="cds_zscm_packapp_def.SAP__Currency" sap:content-version="1"/>
+                <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zscm_packapp_def.SAP__UnitOfMeasure" sap:content-version="1"/>
+                <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zscm_packapp_def.SAP__DocumentDescription" sap:content-version="1"/>
+                <EntitySet Name="SAP__FormatSet" EntityType="cds_zscm_packapp_def.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zscm_packapp_def.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zscm_packapp_def.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__CoverPageSet" EntityType="cds_zscm_packapp_def.SAP__CoverPage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__SignatureSet" EntityType="cds_zscm_packapp_def.SAP__Signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zscm_packapp_def.SAP__ValueHelp" sap:content-version="1"/>
+                <EntitySet Name="C_Materialvh" EntityType="cds_zscm_packapp_def.C_MaterialvhType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZSCM_C_PACKING_APP" EntityType="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="HU" EntityType="cds_zscm_packapp_def.HUType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSCM_I_OpenDelivery_L2" EntityType="cds_zscm_packapp_def.ZSCM_I_OpenDelivery_L2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSCM_I_SampleOperationVH_L1" EntityType="cds_zscm_packapp_def.ZSCM_I_SampleOperationVH_L1Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Material" EntityType="cds_zscm_packapp_def.MaterialType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Plant" EntityType="cds_zscm_packapp_def.PlantType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZSCM_Resource_VH" EntityType="cds_zscm_packapp_def.ZSCM_Resource_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="to_formatSet" Association="cds_zscm_packapp_def.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
+                    <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
+                </AssociationSet>
+                <AssociationSet Name="to_pdfstandardSet" Association="cds_zscm_packapp_def.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
+                    <End EntitySet="SAP__PDFStandardSet" Role="ToRole_to_pdfstandard"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_423F30388E3EF8B840909D5E271BEDFE" Association="cds_zscm_packapp_def.assoc_423F30388E3EF8B840909D5E271BEDFE" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZSCM_C_PACKING_APP" Role="FromRole_assoc_423F30388E3EF8B840909D5E271BEDFE"/>
+                    <End EntitySet="ZSCM_I_OpenDelivery_L2" Role="ToRole_assoc_423F30388E3EF8B840909D5E271BEDFE"/>
+                </AssociationSet>
+                <AssociationSet Name="to_tablecolumnsSet" Association="cds_zscm_packapp_def.to_tablecolumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_tablecolumns"/>
+                    <End EntitySet="SAP__TableColumnsSet" Role="ToRole_to_tablecolumns"/>
+                </AssociationSet>
+                <AssociationSet Name="to_signatureSet" Association="cds_zscm_packapp_def.to_signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_signature"/>
+                    <End EntitySet="SAP__SignatureSet" Role="ToRole_to_signature"/>
+                </AssociationSet>
+                <AssociationSet Name="to_coverpageSet" Association="cds_zscm_packapp_def.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
+                    <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
+                </AssociationSet>
+                <FunctionImport Name="create_hu" ReturnType="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType" EntitySet="ZSCM_C_PACKING_APP" m:HttpMethod="POST" sap:action-for="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType" sap:applicable-path="create_hu_ac">
+                    <Parameter Name="orderNumber" Type="Edm.String" Mode="In" MaxLength="12" sap:label="Order"/>
+                    <Parameter Name="plant" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Plant"/>
+                    <Parameter Name="product" Type="Edm.String" Mode="In" MaxLength="40" sap:label="Material"/>
+                    <Parameter Name="auxMaterial" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="batch" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="customer" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="packInst" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="packInstQuant" Type="Edm.Decimal" Mode="In" Precision="10" Scale="2" Nullable="true"/>
+                    <Parameter Name="packMaterial" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="sealNumber" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="serialNumber" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                    <Parameter Name="storLocItem" Type="Edm.String" Mode="In" MaxLength="50" Nullable="true"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType/plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Plant"/>
+                        <PropertyValue Property="CollectionPath" String="Plant"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType/product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Material"/>
+                        <PropertyValue Property="CollectionPath" String="C_Materialvh"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="product"/>
+                                    <PropertyValue Property="ValueListProperty" String="Material"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="MaterialName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.ZSCM_C_PACKING_APPType/workCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Work Center"/>
+                        <PropertyValue Property="CollectionPath" String="ZSCM_Resource_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="workCenter"/>
+                                    <PropertyValue Property="ValueListProperty" String="workCenter"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Description"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.cds_zscm_packapp_def_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.cds_zscm_packapp_def_Entities/ZSCM_C_PACKING_APP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>create_hu_ac</PropertyPath>
+                                <PropertyPath>packInstru</PropertyPath>
+                                <PropertyPath>packInstDescription</PropertyPath>
+                                <PropertyPath>PackingCustomerInstructions</PropertyPath>
+                                <PropertyPath>packCustomerType</PropertyPath>
+                                <PropertyPath>packStockType</PropertyPath>
+                                <PropertyPath>PackingCustInstDesc</PropertyPath>
+                                <PropertyPath>PackingInstCustQuant</PropertyPath>
+                                <PropertyPath>PackingInstObj</PropertyPath>
+                                <PropertyPath>PackingInstDescObj</PropertyPath>
+                                <PropertyPath>PackingInstQuantObj</PropertyPath>
+                                <PropertyPath>PackingInstQuant</PropertyPath>
+                                <PropertyPath>packagingMaterial</PropertyPath>
+                                <PropertyPath>packagingMaterialDescription</PropertyPath>
+                                <PropertyPath>packagingMaterialCustr</PropertyPath>
+                                <PropertyPath>packagingMaterialCustDesc</PropertyPath>
+                                <PropertyPath>packagingMaterialObj</PropertyPath>
+                                <PropertyPath>packagingMaterialObjDesc</PropertyPath>
+                                <PropertyPath>packInstructionsKey</PropertyPath>
+                                <PropertyPath>packInstructionsCustKey</PropertyPath>
+                                <PropertyPath>prodOrderLongText</PropertyPath>
+                                <PropertyPath>numHUPallets</PropertyPath>
+                                <PropertyPath>auxPackMaterial</PropertyPath>
+                                <PropertyPath>auxPackMaterialDesc</PropertyPath>
+                                <PropertyPath>auxPackMaterialObj</PropertyPath>
+                                <PropertyPath>auxPackMaterialObjDesc</PropertyPath>
+                                <PropertyPath>auxPackMaterialCust</PropertyPath>
+                                <PropertyPath>auxPackMaterialCustDesc</PropertyPath>
+                                <PropertyPath>packInstURL255</PropertyPath>
+                                <PropertyPath>multiContainerText</PropertyPath>
+                                <PropertyPath>multiContFlag</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="startDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="finishDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_deliveries"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>create_hu_ac</PropertyPath>
+                                <PropertyPath>packInstru</PropertyPath>
+                                <PropertyPath>packInstDescription</PropertyPath>
+                                <PropertyPath>PackingCustomerInstructions</PropertyPath>
+                                <PropertyPath>packCustomerType</PropertyPath>
+                                <PropertyPath>packStockType</PropertyPath>
+                                <PropertyPath>PackingCustInstDesc</PropertyPath>
+                                <PropertyPath>PackingInstCustQuant</PropertyPath>
+                                <PropertyPath>PackingInstObj</PropertyPath>
+                                <PropertyPath>PackingInstDescObj</PropertyPath>
+                                <PropertyPath>PackingInstQuantObj</PropertyPath>
+                                <PropertyPath>PackingInstQuant</PropertyPath>
+                                <PropertyPath>packagingMaterial</PropertyPath>
+                                <PropertyPath>packagingMaterialDescription</PropertyPath>
+                                <PropertyPath>packagingMaterialCustr</PropertyPath>
+                                <PropertyPath>packagingMaterialCustDesc</PropertyPath>
+                                <PropertyPath>packagingMaterialObj</PropertyPath>
+                                <PropertyPath>packagingMaterialObjDesc</PropertyPath>
+                                <PropertyPath>packInstructionsKey</PropertyPath>
+                                <PropertyPath>packInstructionsCustKey</PropertyPath>
+                                <PropertyPath>prodOrderLongText</PropertyPath>
+                                <PropertyPath>numHUPallets</PropertyPath>
+                                <PropertyPath>auxPackMaterial</PropertyPath>
+                                <PropertyPath>auxPackMaterialDesc</PropertyPath>
+                                <PropertyPath>auxPackMaterialObj</PropertyPath>
+                                <PropertyPath>auxPackMaterialObjDesc</PropertyPath>
+                                <PropertyPath>auxPackMaterialCust</PropertyPath>
+                                <PropertyPath>auxPackMaterialCustDesc</PropertyPath>
+                                <PropertyPath>packInstURL255</PropertyPath>
+                                <PropertyPath>multiContainerText</PropertyPath>
+                                <PropertyPath>multiContFlag</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.cds_zscm_packapp_def_Entities/ZSCM_I_OpenDelivery_L2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>PackingInstructionsSO</PropertyPath>
+                                <PropertyPath>PackingInstructionKeySO</PropertyPath>
+                                <PropertyPath>PackingInstDescSO</PropertyPath>
+                                <PropertyPath>PackingInstQuantSO</PropertyPath>
+                                <PropertyPath>packagingMaterialSO</PropertyPath>
+                                <PropertyPath>packagingMaterialDescriptionSO</PropertyPath>
+                                <PropertyPath>auxMaterialSO</PropertyPath>
+                                <PropertyPath>auxMaterialDescSO</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>PackingInstructionsSO</PropertyPath>
+                                <PropertyPath>PackingInstructionKeySO</PropertyPath>
+                                <PropertyPath>PackingInstDescSO</PropertyPath>
+                                <PropertyPath>PackingInstQuantSO</PropertyPath>
+                                <PropertyPath>packagingMaterialSO</PropertyPath>
+                                <PropertyPath>packagingMaterialDescriptionSO</PropertyPath>
+                                <PropertyPath>auxMaterialSO</PropertyPath>
+                                <PropertyPath>auxMaterialDescSO</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.cds_zscm_packapp_def_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="./$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="SAP__MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.SAP__DocumentDescription">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__UnitOfMeasure/UnitCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+                <Annotation Term="SAP__CodeList.ExternalCode" Path="ExternalCode"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.AlternateKeys">
+                    <Collection>
+                        <Record>
+                            <PropertyValue Property="Key">
+                                <Collection>
+                                    <Record>
+                                        <PropertyValue Property="Name" Path="ExternalCode"/>
+                                        <PropertyValue Property="Alias" String="ExternalCode"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__DocumentDescription/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__capabilties.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/Orientation"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/PaperSize"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__Format/FitToPage/ErrorRecoveryBehavior" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="../../../../SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27ErrorRecoveryBehaviour%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__Format/FontName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__Format/PaperSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27PaperSize%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zscm_packapp_def.SAP__TableColumns/HorizontalAlignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HorizontalAlignment%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <atom:link rel="self" href="https://vhhhlds4ci.sap.manildra.com.au:44300/sap/opu/odata/sap/ZSCM_PACKAPP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://vhhhlds4ci.sap.manildra.com.au:44300/sap/opu/odata/sap/ZSCM_PACKAPP_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

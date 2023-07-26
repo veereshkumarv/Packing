@@ -18,8 +18,8 @@ builder:
           url: http://ds4cloudfoundry:443
         app:
           name: ZPACKINGAPP
-          description: Packing App
+          description: Seal number pop-up
           package: Z_MG_SCM_PACKAGE_CUST
-          transport: DS4K904437
+          transport: DS4K905019
         exclude:
           - /test/

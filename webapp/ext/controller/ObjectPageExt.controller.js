@@ -15,7 +15,7 @@ sap.ui.define([
 	'sap/m/Text'
 ], function(MessageToast, compLibrary, Controller, TypeString, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ODataModel, UIColumn, MColumn, Text) {
     'use strict';
-
+   
     return {
         onInit: function () {
             var oJson = new sap.ui.model.json.JSONModel({
@@ -51,14 +51,28 @@ sap.ui.define([
     
             this.getOwnerComponent().setModel(oJson1, "item1");
             this.getOwnerComponent().getModel("item1").setProperty("/items1", oitems1);
+            var packURL = sap.ui.getCore().packURL;
 
         },
+        CreateG: function (oEvent) {
+            var manOrder = "00000000000" + oEvent.getSource().getParent().getParent().getBindingContext().getObject().orderNumber;
+            manOrder = manOrder.substr(manOrder.length - 12);
+            var oCrossAppNav = sap.ushell.Container.getService("CrossApplicationNavigation");
+            // trigger navigation
+            var hash = oCrossAppNav.hrefForExternal({
+                target: { semanticObject: "HandlingUnit", action: "enterGoodsReceiptForProductionOrder" },
+                params: { "CAUFVD-AUFNR": manOrder }
+            });
 
+            var url = window.location.href.split('#')[0] + hash;
+
+            sap.m.URLHelper.redirect(url, true);  
+        },
         createHU: function(oEvent) {
             //Open busy dialog
             var busy = new sap.m.BusyDialog();
             //busy.open();
-
+            const Event = oEvent;
             //Get Values Selected by User
             var salesOrderType = oEvent.getSource().getParent().getParent().getBindingContext().getObject().salesOrderType;
             var salesOrder = oEvent.getSource().getParent().getParent().getBindingContext().getObject().salesOrder;
@@ -71,7 +85,8 @@ sap.ui.define([
             var batch = oEvent.getSource().getParent().getParent().getBindingContext().getObject().batch;
             var StorLoc = oEvent.getSource().getParent().getParent().getBindingContext().getObject().StorLoc;
             var cancel = 0;
-
+            var oObjectevent = oEvent.getSource().getParent().getParent().getBindingContext().getObject();
+            console.log(oObjectevent)
             //determine selected packaging instructions
             if (packInst == oEvent.getSource().getParent().getParent().getBindingContext().getObject().packInstru) {
                 var packInstructionsKey = oEvent.getSource().getParent().getParent().getBindingContext().getObject().packInstructionsKey;
@@ -80,8 +95,9 @@ sap.ui.define([
             }
 
             //add leading zeroes 
-            var packMaterial = "000000000000000000" + oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj;
-            packMaterial = packMaterial.substr(packMaterial.length-18);
+            // var packMaterial = "000000000000000000" + oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj;
+            // packMaterial = packMaterial.substr(packMaterial.length-18);
+            var packMaterial = oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj;           
             var packInstQuant = oEvent.getSource().getParent().getParent().getBindingContext().getObject().PackingInstQuantObj;
             var product = "000000000000000000" + oEvent.getSource().getParent().getParent().getBindingContext().getObject().product;
             product = product.substr(product.length-18);
@@ -91,17 +107,29 @@ sap.ui.define([
             var carrier = oEvent.getSource().getParent().getParent().getBindingContext().getObject().carrier;
             manOrder = manOrder.substr(manOrder.length-12);
             var matType;
-            var storeThis = this;
+            // var storeThis = this;
+
+            console.log(oObjectevent);
 
             //determine selected packaging material
-            if (packMaterialCust == oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj) {
+            // if (packMaterialCust == oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj) 
+            if (packMaterialCust == oObjectevent.packagingMaterialObj)             
+            {
                 matType = packCustomerType
-            } else if (packMaterial == oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj) {
+            } 
+            // else if (packMaterial == oEvent.getSource().getParent().getParent().getBindingContext().getObject().packagingMaterialObj) 
+            else if (packMaterial == oObjectevent.packagingMaterialObj) 
+            {
                 matType = packStockType
             }
             console.log(matType)
+//          moved it below to process the above condition 
+            packMaterial =  "000000000000000000" + packMaterial;
+            packMaterial = packMaterial.substr(packMaterial.length-18);
+            var storeThis = this;
             //If packaging material is a container
-            if (matType == '0004' || matType == '0005') {
+            // if (matType == '0004' || matType == '0005') { New changes
+            if (matType == '0004') {
                 //Check RFP validation field and carrier
                 var event = oEvent
                 //get sales order on sales order and ZZ1_RFPRequired_SDH eq true"
@@ -134,23 +162,62 @@ sap.ui.define([
                         console.log(carrier)
                         var payload = "{\"items\":["
                         if (RFPvalidation == 1 && carrier != null && carrier != "" && carrier != 0 ) {
-                            var stat6 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat6
-                            var stat7 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat7
-                            var stat8 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat8
-                            var stat9 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat9
+                            // var stat6 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat6
+                            // var stat7 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat7
+                            // var stat8 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat8
+                            // var stat9 = oEvent.getSource().getParent().getParent().getBindingContext().getObject().stat9
+                            var oObjecty = this.getView().getParent().getBindingContext().getObject();
+                            var stat6 = oObjecty.stat6;
+                            var stat7 = oObjecty.stat7;
+                            var stat8 = oObjecty.stat8;
+                            var stat9 = oObjecty.stat9;
                             var serialNumberList = []
 
                             var oModelCarrCont = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSCM_CONTAINER_EMPTY_SRV");
 
                             oModelCarrCont.read("/ZSCM_CONTAINER_L4/?$filter=materialNumber eq \'" + packMaterial + "\'and manufacturer eq \'"+ carrier + "\'and plant eq \'" + plant + "\'", {
                                 success: function(oData, oResponse) {  
-                                    console.log(oData)                          
+                                    console.log(oData)    
                                     for(let i=0; i<(oData.results.length); i++) {
                                         var serial = oData.results[i].serialNumber;
                                         if (serialNumberList.includes(serial) == false) {
                                             serialNumberList.push(serial)
                                         }
+                                        // removing array elements when not required
+                                        else {
+                                           if ((serial == oData.results[i].serialNumber && oData.results[i].checkstatus == 'Y')) {
+                                            oData.results.splice( i, 1);
+                                            i -=1;
+                                           }
+                                           else if ((serial == oData.results[i-1].serialNumber && oData.results[i-1].checkstatus == 'Y')) {
+                                            oData.results.splice( i-1, 1); 
+                                            if( i > 1)  {
+                                            i -=2;        
+                                            } else if( i == 1) {
+                                                i = 0;
+                                            }
+                                           }else if ((serial == oData.results[i+1].serialNumber && oData.results[i+1].checkstatus == 'Y')) {
+                                            oData.results.splice( i+1, 1);
+                                           }
+                                        }
                                     }
+
+                                    //   Process the order for specific statuses 
+                                    for(let i=0; i<serialNumberList.length; i++) {
+                                      var validate =  serialNumberList[i]
+                                      for (let j=0; j<(oData.results.length); j++) {
+                                        if ((serial == oData.results[j].serialNumber && oData.results[j].userStatustext != undefined))
+                                        {
+                                            if ( oData.results[j].status == 'E0003' || oData.results[j].status == 'E0006'  )
+                                            {
+                                                // remove the item from results table
+
+                                            }
+
+                                        }
+                                      }
+                                    }    
+
                                     var count = 0
                                     for(let i=0; i<serialNumberList.length; i++) {
                                         var addToList = 0
@@ -174,9 +241,11 @@ sap.ui.define([
                                         } else if (stat9 != '' && stat9 != null && stat9 != 'FUM') {
                                             statComp += 1
                                         }
-                                        
+                                        // Addition as nodevalue remains empty if (userStatustext.nodeValue != undefined) {
                                         if (userStatustext != undefined) {
-                                            userStatustext = userStatustext.nodeValue
+                                            if (userStatustext.nodeValue != undefined) {
+                                                userStatustext = userStatustext.nodeValue
+                                            }
                                         } else {
                                             userStatustext = ""
                                         }
@@ -184,7 +253,8 @@ sap.ui.define([
                                         serial = serialNumberList[i]
                                         for(let j=0; j<(oData.results.length); j++){
                                             if ((serial == oData.results[j].serialNumber && oData.results[j].userStatustext != undefined)) {
-                                                totalUserStat += oData.results[i].userStatustext + " "
+                                                totalUserStat += oData.results[i].userStatustext + " " 
+                                                // totalUserStat += oData.results[j].userStatustext + " " Incorrect array index addressing
                                             }
                                         }
                                         for (let j=0; j<4; j++) {
@@ -194,7 +264,9 @@ sap.ui.define([
                                                     console.log("userStat:" + userStat)
                                                     console.log("serial:" + serial)
                                                     if (userStat != undefined) {
-                                                        userStat = userStat.nodeValue
+                                                        if (userStat.nodeValue != undefined) {
+                                                            userStat = userStat.nodeValue
+                                                        }
                                                     } else {
                                                         userStat = ''
                                                     }
@@ -237,6 +309,7 @@ sap.ui.define([
                                             "\",\"dayOwned\":\"" + dayOwned + "\",\"lastRecievedDate\":\"" + lastRecievedDate + "\",\"userStatustext\":\"" + 
                                             totalUserStat + "\"}"
                                             count += 1
+                                            console.log(payload)
                                         }
                                     }
                                     payload += "]}"
@@ -352,7 +425,7 @@ sap.ui.define([
                             })        
                         }
                         
-                    }, 
+                    }.bind(this), 
                     error: function(oError){
                         sap.m.MessageBox.error(oError);
                     }
@@ -360,7 +433,98 @@ sap.ui.define([
                 })
                 console.log(this.getOwnerComponent().getModel());
 
-            } else {
+            } 
+            
+            //If packaging material is a container
+            else if  (matType == '0006') {
+
+
+                if (sap.ui.getCore().byId("OK") === undefined) {
+                    var oButton1 = new sap.m.Button("OK", {
+                        text: "OK"
+                    });
+                }
+                else if (sap.ui.getCore().byId("OK") != undefined) {
+                    var oButton1 = sap.ui.getCore().byId("OK");
+                }
+
+            if (sap.ui.getCore().byId("Cancel") === undefined) {
+                var oButton2 = new sap.m.Button("Cancel", {
+                    text: "Cancel"
+                });
+            }
+            else if (sap.ui.getCore().byId("Cancel") != undefined) {
+                var oButton2 = sap.ui.getCore().byId("Cancel");
+            }
+
+            oButton2.attachPress(function (evt) {
+                if (sap.ui.getCore().byId("Dialog1") != undefined) {
+                    sap.ui.getCore().byId("Dialog1").close();
+                    sap.ui.getCore().byId("Dialog1").destroy();
+                }
+            });
+
+          var oDialog = new sap.m.Dialog("Dialog1", {
+                title: "Select Seal Number",
+                contentWidth: "20%",
+                closeOnNavigation: true,
+                buttons: [oButton1, oButton2],
+                content: [
+                    new sap.m.Label({ text: "Seal Number:", required: true }),
+                    new sap.m.Input({ maxLength: 8, id: "SealNumber" })
+                ]
+            });
+
+            oDialog.addStyleClass("sapUiContentPadding");
+            oDialog.open()
+
+            oButton1.attachPress(function (evt) {
+                var sealn = sap.ui.getCore().byId("SealNumber").getValue()
+                if (sap.ui.getCore().byId("Dialog1") != undefined) {
+                    sap.ui.getCore().byId("Dialog1").close();
+                    sap.ui.getCore().byId("Dialog1").destroy();
+                }
+                var oModelCreate = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSCM_PACKINGACTION_SRV_SRV");
+
+                oModelCreate.callFunction("/CreateHU", {
+                    method: "POST",
+                    urlParameters: {                    
+                        manOrder: manOrder,
+                        batch: batch,
+                        packMaterial: packMaterial, 
+                        plant: plant,
+                        packInst: packInstructionsKey,
+                        product: product, 
+                        sealNumber: sealn,
+                        serialNumber: '',
+                        storLocItem: StorLoc,
+                        auxMaterial: auxMat,
+                        customer: customer,
+                        packInstQuant: packInstQuant
+                    },
+                    success: function(oData, oResponse) {
+                        console.log(oData)
+                        var message = oData.Message
+                        var messageType = oData.Type
+                        if (messageType == 'S') {
+                            console.log(message)
+                            sap.m.MessageToast.show(message);
+                        } else {
+                            sap.m.MessageBox.error(message);
+                        }
+                        
+                    }.bind(this),
+                    error: function(oError) {
+                        console.log(oError)
+                        sap.m.MessageBox.error(oError);
+
+                    }, 
+                })
+
+            });
+            
+            }
+            else {
 
                 var oModelCreateHU = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSCM_PACKINGACTION_SRV_SRV");
 
@@ -371,7 +535,10 @@ sap.ui.define([
                         batch: batch,
                         packMaterial: packMaterial, 
                         plant: plant,
-                        packInst: encodeURI(packInstructionsKey),
+                        // packInst: encodeURI(packInstructionsKey), 
+                        // commenting as only curly braces will be used in the field as per latest discussion if any new special charater pops-up 
+                        // then addition changes required in future
+                        packInst: packInstructionsKey,
                         product: product, 
                         sealNumber: '',
                         serialNumber: '',
@@ -395,6 +562,7 @@ sap.ui.define([
                     error: function(oError) {
                         console.log(oError)
                         sap.m.MessageBox.error(oError);
+
                     }, 
                 })
             }
@@ -404,6 +572,7 @@ sap.ui.define([
             //CREATE HU IF NOT CONT
             
         },
+
 
         createSample: function(oEvent) {
             console.log("here")
@@ -575,12 +744,19 @@ sap.ui.define([
         },
 
         displyPackInst: function(oEvent) {
-            var packInstURL = oEvent.getSource().getParent().getParent().getBindingContext().getObject().packInstURL255;
+            // var packInstURL = oEvent.getSource().getParent().getParent().getBindingContext().getObject().packInstURL255;
+            var packInstURL = sap.ui.getCore().packURL;
+            if ( packInstURL != "" ) {
             console.log(packInstURL);
             window.open(packInstURL);  
+            }
+            if ( packInstURL == "" ) {
+                sap.m.MessageToast.show('There is no link for this packing instruction');
+            }
         },
 
         packToOrder: function(oEvent) {
+
             var PackingInstructionsSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().PackingInstructionsSO;
             var PackingInstDescSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().PackingInstDescSO;
             var PackingInstQuantSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().PackingInstQuantSO;
@@ -591,6 +767,16 @@ sap.ui.define([
             var StackingPatternSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().StackingPatternSO;
             var HeightSettingSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().HeightSettingSO;
             var AlternateSO = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().AlternateSO;
+            // var productCust = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().product;
+            // var customer = oEvent.getSource().getParent().getParent().getSelectedContexts()[0].getObject().customer;
+            // if (customer == null || customer == "")
+            // {
+            //     customer = 0;   
+            // }
+            // if (productCust == null || productCust == "")
+            // {
+            //     productCust = 0;   
+            // }
             if (PackingInstructionsSO == "" || PackingInstructionsSO == null) {
                 sap.m.MessageBox.error("No Packaging Instructions Associated With This Order", {
                         title: "Error",                                      // default
@@ -602,8 +788,99 @@ sap.ui.define([
                         textDirection: sap.ui.core.TextDirection.Inherit     // default
                 });
             } else {
+                // Get new packing instruction for the selected material and customer 
+                // var oupdateSequence = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSCM_PACKINGACTION_SRV_SRV");
+                // oupdateSequence.callFunction("/updatePackingInst", {
+                //     method: "GET",
+                //     urlParameters: {   
+                //         product: productCust, 
+                //         customer: customer                        
+                //     } ,
+                //     success: function(oData, oResponse) {
+                //         console.log(oData)
+                        
+                //         var oObject = this.getView().getParent().getBindingContext().getObject();
+                //         var ordert = oObject.orderNumber;
+                //         var productt = oObject.product;
+                //         var plantt = oObject.plant;
+                //         // var tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/PackingInstDescObj`;
+                //         // var setvalues = this.getOwnerComponent().getModel().setProperty(tempt,oData.packInst);
+                //         var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZSCM_PACKAPP_SRV");
+                //         if (oModel != undefined ){
+                //         var sPath = oModel.createKey("/ZSCM_C_PACKING_APP", {orderNumber: ordert,
+                //             plant:plantt,
+                //             product: productt });
+                //         }
+                //         let q =sap.ui.getCore().byId("smartformImportance");
+                //            let oView = this;
+                //            let testt = oView.getOwnerComponent().getModel();
+
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/quantID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,PackingInstQuantSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/packMaterialID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,packagingMaterialSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/packMaterialDescID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,packagingMaterialDescriptionSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/heightSettingID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,HeightSettingSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/alternateID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,AlternateSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/stackingPatternID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,StackingPatternSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/auxMatID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,auxMaterialSO);
+
+                //         // tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/auxMatDescID`;
+                //         // setvalues = this.getOwnerComponent().getModel().setProperty(tempt,auxMaterialDescSO);
+
+                //         // sap.ui.getCore().byId("__xmlview1--packInstructionID").setValue(PackingInstructionsSO);
+                //         // sap.ui.getCore().byId("__xmlview1--quantID").setValue(PackingInstQuantSO);
+                //         // sap.ui.getCore().byId("__xmlview1--packMaterialID").setValue(packagingMaterialSO);
+                //         // sap.ui.getCore().byId("__xmlview1--packMaterialDescID").setValue(packagingMaterialDescriptionSO);
+                //         // sap.ui.getCore().byId("__xmlview1--heightSettingID").setValue(HeightSettingSO);
+                //         // sap.ui.getCore().byId("__xmlview1--alternateID").setValue(AlternateSO);
+                //         // sap.ui.getCore().byId("__xmlview1--stackingPatternID").setValue(StackingPatternSO);
+                //         // sap.ui.getCore().byId("__xmlview1--auxMatID").setValue(auxMaterialSO);
+                //         // sap.ui.getCore().byId("__xmlview1--auxMatDescID").setValue(auxMaterialDescSO);
+                //         // oData.packInst  = 500;
+                //         // var callt1 = new sap.ui.core.mvc.Controller("packingapp.packingapp.ext.controller.CustomButtons");
+                //         // var testt1 = callt1.onPress( undefined, oData.packInst );
+
+                //         if( oData.packInst != "" )
+                //         {
+
+                //         tempt = `/ZSCM_C_PACKING_APP(orderNumber='${ordert}',plant='${plantt}',product='${productt}')/packInstructionDescID`;
+                //         setvalues = this.getOwnerComponent().getModel().setProperty(tempt,oData.packInst);
+
+                //             // sap.ui.getCore().byId("__xmlview1--packInstructionDescID").setValue(PackingInstDescSO);
+                      
+                //             // this.onPress( undefined, oData.packInst );
+                //         //   var callt = new sap.ui.core.mvc.Controller("packingapp.packingapp.ext.controller.CustomButtons");
+                //         //   var testt = callt.onPress( undefined, oData.packInst );
+                //         }
+                //         else
+                //         {
+                //             this.onPress( undefined, oData.packInst );
+                //             sap.m.MessageToast.show("No customer specific packing instruction available");
+                //         }
+                        
+                //     }.bind(this),
+                //     error: function(oError) {
+                //         console.log(oError)
+                //         // sap.m.MessageToast.show(oError);
+                //         sap.m.MessageToast.show("No customer specific packing instruction available");
+                //     }, 
+                // });
+
+                
                 sap.ui.getCore().byId("__xmlview1--packInstructionID").setValue(PackingInstructionsSO);
-                sap.ui.getCore().byId("__xmlview1--packInstructionDescID").setValue(PackingInstDescSO);
                 sap.ui.getCore().byId("__xmlview1--quantID").setValue(PackingInstQuantSO);
                 sap.ui.getCore().byId("__xmlview1--packMaterialID").setValue(packagingMaterialSO);
                 sap.ui.getCore().byId("__xmlview1--packMaterialDescID").setValue(packagingMaterialDescriptionSO);
@@ -612,6 +889,7 @@ sap.ui.define([
                 sap.ui.getCore().byId("__xmlview1--stackingPatternID").setValue(StackingPatternSO);
                 sap.ui.getCore().byId("__xmlview1--auxMatID").setValue(auxMaterialSO);
                 sap.ui.getCore().byId("__xmlview1--auxMatDescID").setValue(auxMaterialDescSO);
+
             }
         },
 
@@ -662,7 +940,10 @@ sap.ui.define([
                     batch: batch,
                     packMaterial: packMaterial, 
                     plant: plant,
-                    packInst: encodeURI(packInstructionsKey),
+                    // packInst: encodeURI(packInstructionsKey), 
+                    // commenting as only curly braces will be used in the field as per latest discussion if any new special charater pops-up 
+                    // then addition changes required in future
+                    packInst: packInstructionsKey,
                     product: product, 
                     sealNumber: seal,
                     serialNumber: container,
@@ -776,7 +1057,10 @@ sap.ui.define([
                     batch: batch,
                     packMaterial: packMaterial, 
                     plant: plant,
-                    packInst: encodeURI(packInstructionsKey),
+                    // packInst: encodeURI(packInstructionsKey), 
+                    // commenting as only curly braces will be used in the field as per latest discussion if any new special charater pops-up 
+                    // then addition changes required in future
+                    packInst: packInstructionsKey,
                     product: product, 
                     serialNumber: serialNumber,
                     storLocItem: StorLoc,

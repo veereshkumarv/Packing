@@ -63,7 +63,7 @@
     "sap.ui5": {
         "flexEnabled": true,
         "dependencies": {
-            "minUI5Version": "1.108.0",
+            "minUI5Version": "1.108.16",
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {},
@@ -74,6 +74,11 @@
                 "sap.suite.ui.generic.template": {}
             }
         },
+        "services": {
+			"ShellUIService": {
+				"factoryName": "sap.ushell.ui5service.ShellUIService"
+			}
+		},
         "contentDensities": {
             "compact": true,
             "cozy": true
@@ -134,7 +139,7 @@
                                     "Actions": {
                                         "sendToCoLos": {
                                             "id": "sendToCoLosButton",
-                                            "text": "Send To CoLos",
+                                            "text": "Send to CoLos",
                                             "press": "sendToCoLos",
                                             "requiresSelection": false
                                         },
@@ -148,6 +153,12 @@
                                             "id": "createHUButton",
                                             "text": "Create HU",
                                             "press": "createHU",
+                                            "requiresSelection": false
+                                        },
+                                        "CreateG": {
+                                            "id": "createG",
+                                            "text": "Post goods receipt",
+                                            "press": "CreateG",
                                             "requiresSelection": false
                                         },
                                         "addToExisting": {

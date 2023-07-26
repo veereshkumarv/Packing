@@ -44,21 +44,28 @@
             <smartForm:GroupElement id="BasicFinishDate" label="Basic Finish Date">
                 <smartField:SmartField id="basicFinishDateID" value="{finishDate}"/>
             </smartForm:GroupElement>
+            <!-- <smartForm:GroupElement id="rfpstatus" label="RFP Status ID">
+                <smartField:SmartField id="rfpstatusID" value="{rfpstatus}"/>
+            </smartForm:GroupElement>  -->
+            <smartForm:GroupElement id="rfpdescription" label="RFP Status">
+                <smartField:SmartField id="rfpdescriptionID" value="{rfpdescription}"/>
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="plannedQuant" label="Planned Quantity">
                 <smartField:SmartField id="plannedQuantID" value="{manuPlannedQuant}"/>
-            </smartForm:GroupElement> 
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="receivedQuant" label="Received Quantity">
                 <smartField:SmartField id="receivedQuantID" value="{recievedQuant}"/>
-            </smartForm:GroupElement> 
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="prodOrderNote" label="Production Order Note">
-                <smartField:SmartField id="prodOrderNoteID" value="{prodOrderLongText}"/>
-            </smartForm:GroupElement> 
+                <!-- <smartField:SmartField id="prodOrderNoteID" value="{prodOrderLongText}" maxLength="0"/> -->
+                <ExpandableText id="prodOrderNoteID" text="{prodOrderLongText}"  overflowMode= "InPlace" />
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="workCenter" label="Work Center">
                 <smartField:SmartField id="workCenterID" value="{workCenterDesc}"/>
             </smartForm:GroupElement>
             <smartForm:GroupElement id="carrier" label="Carrier">
                 <smartField:SmartField id="carrierID" value="{carrierDesc}"/>
-            </smartForm:GroupElement>  
+            </smartForm:GroupElement>
         </smartForm:Group>
 
         <smartForm:Group label="Handling Unit Information">
@@ -79,16 +86,16 @@
             </smartForm:GroupElement>
             <smartForm:GroupElement id="quantGroupElement" label="Quantity">
                 <Input id="quantID" value="{PackingInstQuantObj}"/>
-            </smartForm:GroupElement>  
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="custStatusGroupElement" label="Customer required container status">
                 <smartField:SmartField id="custStatusID" value="{custStatus}"/>
-            </smartForm:GroupElement> 
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="auxMatGroupElement" label="Auxiliary Packing Material">
                 <smartField:SmartField id="auxMatID" value="{auxPackMaterialObj}"/>
-            </smartForm:GroupElement> 
+            </smartForm:GroupElement>
             <smartForm:GroupElement id="auxMatDescGroupElement" label="Auxiliary Packing Material Description">
                 <smartField:SmartField id="auxMatDescID" value="{auxPackMaterialObjDesc}"/>
-            </smartForm:GroupElement> 
+            </smartForm:GroupElement>
         </smartForm:Group>
 
     </smartForm:SmartForm>

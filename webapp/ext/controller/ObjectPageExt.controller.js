@@ -178,45 +178,30 @@ sap.ui.define([
                             oModelCarrCont.read("/ZSCM_CONTAINER_L4/?$filter=materialNumber eq \'" + packMaterial + "\'and manufacturer eq \'"+ carrier + "\'and plant eq \'" + plant + "\'", {
                                 success: function(oData, oResponse) {  
                                     console.log(oData)    
-                                    for(let i=0; i<(oData.results.length); i++) {
+                                    for (let i = 0; i < (oData.results.length); i++) {
                                         var serial = oData.results[i].serialNumber;
-                                        if (serialNumberList.includes(serial) == false) {
+                                        if (serialNumberList.includes(serial) == false && (oData.results[i].checkstatus == 'X' || oData.results[i].checkstatus == 'x')) {
                                             serialNumberList.push(serial)
                                         }
-                                        // removing array elements when not required
+                                        // removing array elements when not required else will fail in validations below.
                                         else {
-                                           if ((serial == oData.results[i].serialNumber && oData.results[i].checkstatus == 'Y')) {
-                                            oData.results.splice( i, 1);
-                                            i -=1;
-                                           }
-                                           else if ((serial == oData.results[i-1].serialNumber && oData.results[i-1].checkstatus == 'Y')) {
-                                            oData.results.splice( i-1, 1); 
-                                            if( i > 1)  {
-                                            i -=2;        
-                                            } else if( i == 1) {
-                                                i = 0;
+                                            if ((serial == oData.results[i].serialNumber && oData.results[i].checkstatus == 'Y')) {
+                                             oData.results.splice( i, 1);
+                                             i -=1;
                                             }
-                                           }else if ((serial == oData.results[i+1].serialNumber && oData.results[i+1].checkstatus == 'Y')) {
-                                            oData.results.splice( i+1, 1);
-                                           }
-                                        }
-                                    }
-
-                                    //   Process the order for specific statuses 
-                                    for(let i=0; i<serialNumberList.length; i++) {
-                                      var validate =  serialNumberList[i]
-                                      for (let j=0; j<(oData.results.length); j++) {
-                                        if ((serial == oData.results[j].serialNumber && oData.results[j].userStatustext != undefined))
-                                        {
-                                            if ( oData.results[j].status == 'E0003' || oData.results[j].status == 'E0006'  )
-                                            {
-                                                // remove the item from results table
-
+                                            else if ((serial == oData.results[i-1].serialNumber && oData.results[i-1].checkstatus == 'Y')) {
+                                             oData.results.splice( i-1, 1); 
+                                             if( i > 1)  {
+                                             i -=2;        
+                                             } else if( i == 1) {
+                                                 i = 0;
+                                             }
+                                            }else if ((serial == oData.results[i+1].serialNumber && oData.results[i+1].checkstatus == 'Y')) {
+                                             oData.results.splice( i+1, 1);
                                             }
-
-                                        }
-                                      }
-                                    }    
+                                         }                                      
+                                     }
+  
 
                                     var count = 0
                                     for(let i=0; i<serialNumberList.length; i++) {

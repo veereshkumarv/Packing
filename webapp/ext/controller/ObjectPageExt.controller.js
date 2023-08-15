@@ -421,8 +421,8 @@ sap.ui.define([
             } 
             
             //If packaging material is a container
-            else if  (matType == '0006') {
-
+            // else if  (matType == '0006') {
+	     else if  (matType == '0005') {
 
                 if (sap.ui.getCore().byId("OK") === undefined) {
                     var oButton1 = new sap.m.Button("OK", {
